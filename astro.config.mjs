@@ -4,7 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
 export default defineConfig({
-  base: "/Portofolio/", // 🔹 chemin de ton repo GitHub Pages
+  base: "/Portfolio",
   integrations: [tailwind(), react()],
   vite: {
     resolve: {
