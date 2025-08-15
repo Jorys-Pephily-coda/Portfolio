@@ -83,9 +83,17 @@
           const form = e.target as HTMLFormElement;
           const formData = new FormData(form);
           fetch(scriptURL, { method: "POST", body: formData })
-            .then(response => alert("Message envoyé avec succès !"))
-            .catch(error => alert("Erreur lors de l'envoi : " + error));
-        });
+            .then(response => {
+              form.reset();
+              formMessage.textContent = "✅ Message envoyé avec succès !";
+              formMessage.classList.remove("hidden");
+              setTimeout(() => formMessage.classList.add("hidden"), 4000);
+            })
+            .catch(error => {
+              formMessage.textContent = "❌ Erreur lors de l'envoi : " + error;
+              formMessage.classList.remove("hidden");
+              setTimeout(() => formMessage.classList.add("hidden"), 4000);
+            });
         </script>
         <div
           id="form-message"
