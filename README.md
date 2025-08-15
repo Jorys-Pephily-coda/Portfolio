@@ -24,6 +24,7 @@
 ## **Project structure**
 ```
 public/
+├── projects/
 └── svg/
 src/
 ├── Components/
