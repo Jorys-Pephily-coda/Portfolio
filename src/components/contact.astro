@@ -7,94 +7,44 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="text-[var(--white-icon)]">
         <p class="mb-4">
-          Une question ? un projet en tête ? nous pouvons en parler ! N'hésitez pas à me contacter via le formulaire ci-dessous ou par email.
+          Une question ? un projet en tête ? nous pouvons en parler ! N'hésitez
+          pas à me contacter via le formulaire ci-dessous ou par email.
         </p>
         <div class="flex items-center gap-2">
           <span>Emplacements:</span>
-          <span class="text-[var(--white)]"> Orléans, France / Chatillon, France</span>
+          <span class="text-[var(--white)]">
+            Orléans, France / Chatillon, France</span
+          >
         </div>
       </div>
 
       <div>
-        <!-- <form
-          id="contact-form"
-          action="https://formspree.io/f/mnnjznkj"
-          method="POST"
-          class="flex flex-col gap-4"
-        >
+        <form id="contactForm" class="flex flex-col gap-4">
           <input
             type="text"
             name="from_name"
-            placeholder="Name"
-            required
             class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            placeholder="Votre nom"
+            required
           />
           <input
             type="email"
             name="reply_to"
-            placeholder="Email"
-            required
             class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            placeholder="Votre email"
+            required
           />
           <textarea
             name="message"
-            placeholder="Message"
-            rows="6"
-            required
             class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
-          ></textarea>
+            placeholder="Votre message"
+            required></textarea>
           <button
             type="submit"
             class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+            >Envoyer</button
           >
-            Submit
-          </button>
-        </form> -->
-        <form id="contactForm" class="flex flex-col gap-4">
-          <input 
-            type="text" name="from_name" 
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]" 
-            placeholder="Votre nom" 
-            required
-          />
-          <input 
-            type="email" name="reply_to" 
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]" 
-            placeholder="Votre email" 
-            required
-          />
-          <textarea 
-            name="message" 
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
-            placeholder="Votre message" 
-            required
-          ></textarea>
-          <button
-            type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
-          >Envoyer</button>
         </form>
-
-        <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwrdTKcRJ2Z6eyKY6G8mJT-OqZ2Pi_srpYLDGYu9Q_LSCOK3a2TB7S1TODlbhm9Alir/exec";
-
-        document.getElementById("contactForm").addEventListener("submit", e => {
-          e.preventDefault();
-          const form = e.target as HTMLFormElement;
-          const formData = new FormData(form);
-          fetch(scriptURL, { method: "POST", body: formData })
-            .then(response => {
-              form.reset();
-              formMessage.textContent = "✅ Message envoyé avec succès !";
-              formMessage.classList.remove("hidden");
-              setTimeout(() => formMessage.classList.add("hidden"), 4000);
-            })
-            .catch(error => {
-              formMessage.textContent = "❌ Erreur lors de l'envoi : " + error;
-              formMessage.classList.remove("hidden");
-              setTimeout(() => formMessage.classList.add("hidden"), 4000);
-            });
-        </script>
         <div
           id="form-message"
           class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
@@ -104,37 +54,30 @@
       </div>
     </div>
   </div>
-  <br>
-  <div>
-  </div>
+  <br />
+  <div></div>
 </section>
 
-<script type="module" is:inline>
+<script>
   const form = document.getElementById("contact-form");
   const formMessage = document.getElementById("form-message");
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwrdTKcRJ2Z6eyKY6G8mJT-OqZ2Pi_srpYLDGYu9Q_LSCOK3a2TB7S1TODlbhm9Alir/exec";
 
-  form.addEventListener("submit", async (e) => {
+  document.getElementById("contactForm").addEventListener("submit", e => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
-      });
-      if (response.ok) {
+    fetch(scriptURL, { method: "POST", body: formData })
+      .then(response => {
         form.reset();
-        form.style.display = "none";
+        formMessage.textContent = "✅ Message envoyé avec succès !";
         formMessage.classList.remove("hidden");
-      } else {
-        const data = await response.json();
-        console.error("Error response:", data);
-        alert("There was a problem sending your message.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("There was a problem sending your message.");
-    }
+        setTimeout(() => formMessage.classList.add("hidden"), 4000);
+      })
+      .catch(error => {
+        formMessage.textContent = "❌ Erreur lors de l'envoi : " + error;
+        formMessage.classList.remove("hidden");
+        setTimeout(() => formMessage.classList.add("hidden"), 4000);
+      });
   });
 </script>
